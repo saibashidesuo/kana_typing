@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Clear from './Clear/Clear';
+import Initial from './initial/Initial';
+import Typing from './typing/Typing';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [isTyping, setIsTyping] = useState(false);
+  const [timeTaken, setTimeTaken] = useState(0);
+  const [numberOfTypos, setNumberOfTypos] = useState(0);
+  const [timerIntervalId, setTimerIntervalId] = useState<number | null>(null);
+
+  const start = () => {
+    setIsTyping(true);
+    setTimerIntervalId(
+      window.setInterval(() => {
+        setTimeTaken((prevTimeTaken) =>
+          Number((prevTimeTaken + 0.1).toFixed(1))
+        );
+      }, 100)
+    );
+  };
+
+  const end = () => {
+    setIsTyping(false);
+    if (!timerIntervalId) {
+      throw new Error();
+    }
+    window.clearInterval(timerIntervalId);
+  };
+
+  const component = () => {
+    if (!timeTaken && !isTyping) {
+      return <Initial start={start} />;
+    }
+    return isTyping ? (
+      <Typing
+        timeTakenAsString={timeTaken.toFixed(1)}
+        numberOfTypos={numberOfTypos}
+        setNumberOfTypos={setNumberOfTypos}
+        end={end}
+      />
+    ) : (
+      <Clear
+        numberOfTypos={numberOfTypos}
+        timeTakenAsString={timeTaken.toFixed(1)}
+      />
+    );
+  };
+
+  return component();
 }
 
 export default App;
