@@ -25,4 +25,4 @@ jobs:
         run: npx eslint ./src
 
       - name: check stylelint
-        run: npx stylelint ./src
+        run: npx stylelint ./src/**/*.scss
