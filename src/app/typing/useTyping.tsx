@@ -60,6 +60,10 @@ export default function useTyping(
 
   const typing = useCallback(
     (event: KeyboardEvent) => {
+      if (!kanaFrom(event.code)) {
+        return;
+      }
+
       const nextTypedCharacters = nextTypedCharactersFrom(event.code);
 
       if (isWrong(nextTypedCharacters)) {
