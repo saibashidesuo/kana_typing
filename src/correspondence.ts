@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 const table: Record<string, string> = {
   Digit1: 'ぬ',
   Digit2: 'ふ',
@@ -46,6 +47,8 @@ const table: Record<string, string> = {
   Slash: 'め',
   IntlRo: 'ろ',
 };
+/* eslint-enable @typescript-eslint/naming-convention */
+
 const dakutenTable = [
   { from: 'か', to: 'が' },
   { from: 'き', to: 'ぎ' },
@@ -91,8 +94,6 @@ export const addDakutenTo = (kanaToBeAbleToaddDakutenTo: string) => {
 };
 export const isAddedDakutenTo = (kana: string) =>
   dakutenTable.some(({ to }) => to === kana);
-export const abcde = (kana: string) =>
-  dakutenTable.some(({ from, to }) => [from, to].includes(kana));
 
 export const canAddHanDakutenTo = (kana: string) =>
   handakutenTable.some(({ from }) => from === kana);
