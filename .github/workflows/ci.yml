@@ -11,10 +11,13 @@ jobs:
 
     steps:
       - name: install npm packages
-        run: npm ci
-        
+        run: npm i
+
       - name: check prettier
         run: npx prettier --loglevel=error --check ./src
-        
+
       - name: check eslint
         run: npx eslint ./src
+
+      - name: check stylelint
+        run: npx stylelint ./src
