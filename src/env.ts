@@ -1,8 +1,9 @@
-export const numberOfThemes = 1;
-// export const allThemes = [
-//   'こんにちは',
-//   'さようなら',
-//   'ありがとう',
-//   'こんばんは',
-// ];
-export const allThemes = ['づつさそぴひ', 'こみもねる'];
+export const numberOfThemes = 3;
+export const allThemes = [
+  'こんにちは',
+  'さようなら',
+  'ありがとう',
+  'こんばんは',
+  'すみません',
+  'あさはぱん',
+];
