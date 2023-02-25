@@ -81,6 +81,7 @@ const handakutenTable = [
 
 export const kanaFrom = (code: string) => table[code];
 
+export const isDakutenCode = (code: string) => code === 'BracketLeft';
 export const canAddDakutenTo = (kana: string) =>
   dakutenTable.some(({ from }) => from === kana);
 export const addDakutenTo = (kanaToBeAbleToaddDakutenTo: string) => {
@@ -95,6 +96,7 @@ export const addDakutenTo = (kanaToBeAbleToaddDakutenTo: string) => {
 export const isAddedDakutenTo = (kana: string) =>
   dakutenTable.some(({ to }) => to === kana);
 
+export const isHanDakutenCode = (code: string) => code === 'BracketRight';
 export const canAddHanDakutenTo = (kana: string) =>
   handakutenTable.some(({ from }) => from === kana);
 export const addHanDakutenTo = (kanaToBeAbleToaddHanDakutenTo: string) => {
@@ -108,3 +110,6 @@ export const addHanDakutenTo = (kanaToBeAbleToaddHanDakutenTo: string) => {
 };
 export const isAddedHandakutenTo = (kana: string) =>
   handakutenTable.some(({ to }) => to === kana);
+
+export const isNotKanaAndDakutenAndHandakutenCode = (code: string) =>
+  !table[code] && !isDakutenCode(code) && !isHanDakutenCode(code);

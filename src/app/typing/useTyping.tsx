@@ -4,6 +4,9 @@ import {
   addHanDakutenTo,
   canAddDakutenTo,
   canAddHanDakutenTo,
+  isDakutenCode,
+  isHanDakutenCode,
+  isNotKanaAndDakutenAndHandakutenCode,
   kanaFrom,
 } from '../../correspondence';
 import themes from './themes';
@@ -22,12 +25,12 @@ export default function useTyping(
   const nextTypedCharactersFrom = useCallback(
     (code: string) => {
       const lastCharacter = typedCharacters.slice(-1);
-      if (code === 'BracketLeft') {
+      if (isDakutenCode(code)) {
         return canAddDakutenTo(lastCharacter)
           ? typedCharacters.slice(0, -1) + addDakutenTo(lastCharacter)
           : typedCharacters;
       }
-      if (code === 'BracketRight') {
+      if (isHanDakutenCode(code)) {
         return canAddHanDakutenTo(lastCharacter)
           ? typedCharacters.slice(0, -1) + addHanDakutenTo(lastCharacter)
           : typedCharacters;
@@ -60,7 +63,7 @@ export default function useTyping(
 
   const typing = useCallback(
     (event: KeyboardEvent) => {
-      if (!kanaFrom(event.code)) {
+      if (isNotKanaAndDakutenAndHandakutenCode(event.code)) {
         return;
       }
 
