@@ -5,6 +5,9 @@ import {
   canAddHanDakutenTo,
   isAddedDakutenTo,
   isAddedHandakutenTo,
+  isDakutenCode,
+  isHanDakutenCode,
+  isNotKanaAndDakutenAndHandakutenCode,
   kanaFrom,
 } from './correspondence';
 
@@ -20,6 +23,17 @@ describe('仮名', () => {
 });
 
 describe('濁点関連', () => {
+  describe('isDakutenCode', () => {
+    test('濁点のコードを与えた場合、trueを返すこと', () => {
+      expect(isDakutenCode('BracketLeft')).toBeTruthy();
+    });
+    test('濁点のコード、もしくはコードでない文字列を与えた場合、falseが返ること', () => {
+      expect(isDakutenCode('Digit1')).toBeFalsy();
+      expect(isDakutenCode('BracketRight')).toBeFalsy();
+      expect(isDakutenCode('test')).toBeFalsy();
+    });
+  });
+
   describe('canAddDakutenTo', () => {
     test('濁点を付けることができる仮名を与えられた場合_trueを返すこと', () => {
       expect(canAddDakutenTo('か')).toBeTruthy();
@@ -56,6 +70,17 @@ describe('濁点関連', () => {
 });
 
 describe('半濁点関連', () => {
+  describe('isDakutenCode', () => {
+    test('半濁点のコードを与えた場合、trueを返すこと', () => {
+      expect(isHanDakutenCode('BracketRight')).toBeTruthy();
+    });
+    test('半濁点のコード、もしくはコードでない文字列を与えた場合、falseが返ること', () => {
+      expect(isHanDakutenCode('Digit1')).toBeFalsy();
+      expect(isHanDakutenCode('BracketLeft')).toBeFalsy();
+      expect(isHanDakutenCode('test')).toBeFalsy();
+    });
+  });
+
   describe('canAddHandakutenTo', () => {
     test('半濁点を付けられる仮名を与えた場合、trueが返ること', () => {
       expect(canAddHanDakutenTo('は')).toBeTruthy();
@@ -84,9 +109,22 @@ describe('半濁点関連', () => {
     test('半濁点付の仮名を与えた場合、trueが返ること', () => {
       expect(isAddedHandakutenTo('ぱ')).toBeTruthy();
     });
-    test('半濁点付でない仮名、もしくは仮名以外が与えられた場合、falseが返ること', () => {
+    test('半濁点付でない仮名、もしくは仮名以外を与えた場合、falseが返ること', () => {
       expect(isAddedHandakutenTo('あ')).toBeFalsy();
       expect(isAddedHandakutenTo('_')).toBeFalsy();
+    });
+  });
+});
+
+describe('仮名・濁点・半濁点全て関連', () => {
+  describe('isNotKanaAndDakutenAndHandakutenCode', () => {
+    test('仮名・半濁点・濁点のコードを与えた場合、falseが返ること', () => {
+      expect(isNotKanaAndDakutenAndHandakutenCode('Digit1')).toBeFalsy();
+      expect(isNotKanaAndDakutenAndHandakutenCode('BracketLeft')).toBeFalsy();
+      expect(isNotKanaAndDakutenAndHandakutenCode('BracketRight')).toBeFalsy();
+    });
+    test('仮名・半濁点・濁点のコード以外を与えた場合、trueが返ること', () => {
+      expect(isNotKanaAndDakutenAndHandakutenCode('test')).toBeTruthy();
     });
   });
 });
