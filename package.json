@@ -48,7 +48,18 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-jest": "^27.2.1",
+    "lint-staged": "^13.1.2",
     "markuplint": "^3.3.0",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "simple-git-hooks": "^2.8.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "npx prettier --check",
+      "npx eslint"
+    ]
   }
 }
