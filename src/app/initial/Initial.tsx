@@ -1,4 +1,4 @@
-import { numberOfThemes } from '../env';
+import { numberOfThemes } from '../../env';
 
 type Props = {
   start: () => void;
