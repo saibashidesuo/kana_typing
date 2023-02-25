@@ -26,3 +26,6 @@ jobs:
 
       - name: check stylelint
         run: npx stylelint ./src/**/*.scss
+
+      - name: run tests
+        run: npm test
