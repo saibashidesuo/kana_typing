@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  testsuite:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: install npm packages
+        run: npm ci
+        
+      - name: check prettier
+        run: npx prettier --loglevel=error --check ./src
+        
+      - name: check eslint
+        run: npx eslint ./src
