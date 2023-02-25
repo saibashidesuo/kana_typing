@@ -1,4 +1,4 @@
-import Clear from './Clear/Clear';
+import Clear from './clear/Clear';
 import Initial from './initial/Initial';
 import Typing from './typing/Typing';
 import useApp from './useApp';

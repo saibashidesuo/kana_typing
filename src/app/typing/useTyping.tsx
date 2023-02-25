@@ -5,7 +5,7 @@ import {
   canAddDakutenTo,
   canAddHanDakutenTo,
   kanaFrom,
-} from '../correspondence';
+} from '../../correspondence';
 import themes from './themes';
 
 export default function useTyping(

@@ -1,4 +1,4 @@
-import { allThemes, numberOfThemes } from '../env';
+import { allThemes, numberOfThemes } from '../../env';
 
 const themes = () =>
   [...new Array<string>(numberOfThemes)].reduce<string[]>((soFar) => {
